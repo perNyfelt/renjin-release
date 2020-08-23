@@ -8,3 +8,52 @@ buildscript {
 
 apply from: 'gradle/report.gradle'
 
+
+def profile = System.getProperty("profile", "list")
+def pkgList = new ArrayList<String>()
+def pkgFile = new File("packages." + profile)
+for (line in pkgFile) {
+  def lineTrim = line.trim()
+  if (!lineTrim.startsWith('#') && !line.isBlank() && !lineTrim.startsWith("-")) {
+    if (lineTrim.contains(":")) {
+      lineTrim = lineTrim.replace('org.renjin.cran:', '')
+      if (lineTrim.contains(":")) {
+        lineTrim = lineTrim.substring(0, lineTrim.indexOf(':'))
+      }
+    }
+    //println("Adding $lineTrim subproject")
+    pkgList.add(lineTrim)
+  }
+}
+
+// This is just here for testing purposes, to make sure all tests are actually run if not built before
+tasks.register("cleanTests") {
+  configure {
+    print("Cleaning ")
+    for (subProject in subprojects) {
+      if (pkgList.contains(subProject.name)) {
+        print("$subProject.name, ")
+        dependsOn subProject.tasks.clean
+      }
+    }
+    println()
+  }
+}
+
+tasks.register("runTests") {
+  configure {
+    print("Running tests in ")
+    for (subProject in subprojects) {
+      if (pkgList.contains(subProject.name)) {
+        print("$subProject.name, ")
+        dependsOn subProject.tasks.test
+      }
+    }
+    println()
+  }
+}
+
+tasks.register("checkTests") {
+  print("Not yet implemented")
+}
+
