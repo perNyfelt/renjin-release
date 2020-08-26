@@ -47,7 +47,7 @@ tasks.register("runTests") {
       if (pkgList.contains(subProject.name)) {
         print("$subProject.name, ")
         subProject.tasks.testNamespace.ignoreFailures = true
-        // not sure which one is best to depend on test or testNamespace
+        // not sure which one is best to depend on: test or testNamespace
         dependsOn subProject.tasks.test
         //dependsOn subProject.tasks.testNamespace
       }
