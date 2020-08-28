@@ -8,9 +8,12 @@ VAGRANTFILE_API_VERSION = "2"
 ENV["LC_ALL"] = "en_US.UTF-8"
 
 $script = <<-'SCRIPT'
-mkdir -p /home/vagrant/.gradle
-echo "renjinHomeDir=/home/ubuntu/renjin-release/renjin/tools/gnur-installation/src/main/resources
-gccBridgePlugin=/home/ubuntu/renjin-release/libstdc++/build/bridge.so" > /home/vagrant/.gradle/gradle.properties
+    GRADLE_DIR=/home/vagrant/.gradle
+    mkdir -p $GRADLE_DIR
+    echo "renjinHomeDir=/home/ubuntu/renjin-release/renjin/tools/gnur-installation/src/main/resources" > $GRADLE_DIR/gradle.properties
+    echo "gccBridgePlugin=/home/ubuntu/renjin-release/libstdc++/build/bridge.so" >> $GRADLE_DIR/gradle.properties
+    chown vagrant $GRADLE_DIR
+    chown vagrant $GRADLE_DIR/gradle.properties
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
