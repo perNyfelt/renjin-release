@@ -1,2 +1,4 @@
 date
 digest
+- sha1Test.R: floating point values are different, but within tolerances
+MASS
