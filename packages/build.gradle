@@ -61,7 +61,7 @@ tasks.register("checkTests") {
   dependsOn 'runTests'
 
   ext.parseProfile = {
-    println("parsing $pkgFile...")
+    //println("parsing $pkgFile...")
     def profileMap = new HashMap<String, List<String>>()
     def currentPkg;
     for (line in pkgFile) {
@@ -80,14 +80,20 @@ tasks.register("checkTests") {
           profileMap.put(currentPkg, exceptionList)
         }
       } else if (lineTrim.startsWith("-") && currentPkg != null) {
-        def exceptionList = profileMap.get(currentPkg);
-        def exclusion = lineTrim.substring(1, lineTrim.indexOf(':')).trim()
-        println("Adding exclusion for $exclusion for package $currentPkg")
+        def exceptionList = profileMap.get(currentPkg)
+        def exclusion
+        if (lineTrim.contains(":")) {
+          exclusion = lineTrim.substring(1, lineTrim.indexOf(':')).trim()
+        } else {
+          exclusion = lineTrim.substring(1).trim()
+          if (exclusion.contains(" ")) {
+            exclusion = exclusion.substring(0, exclusion.indexOf(' '))
+          }
+        }
+        //println("Adding exclusion for $exclusion for package $currentPkg")
         exceptionList.add(exclusion)
       }
     }
-    def size = profileMap.keySet().size()
-    println("profileMap contains $size entries")
     return(profileMap)
   }
 
@@ -120,7 +126,7 @@ tasks.register("checkTests") {
     if (failureDetected) {
       throw new GradleException("$numFailures failure(s) detected, checkTests for profile \"$profile\" was NOT successful")
     } else {
-      println("All tests in the $projectList.size packages of profile \"$profile\" checked and verified, good to go!")
+      println("\nAll tests in the $projectList.size packages of profile \"$profile\" checked and verified, good to go!")
     }
   }
 }
