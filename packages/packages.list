@@ -465,7 +465,6 @@ org.renjin.cran:htmlTable:1.13.1
 org.renjin.cran:htmltools:0.3.6
 org.renjin.cran:htmlwidgets:1.3
 org.renjin.cran:httpcode:0.2.0
-org.renjin.cran:httpuv:null*
 org.renjin.cran:huxtable:4.6.0
 org.renjin.cran:hypergeo:1.2-13
 org.renjin.cran:ibdreg:0.2.5
@@ -672,7 +671,6 @@ org.renjin.cran:plogr:0.2.0
 org.renjin.cran:plot3D:1.1.1
 org.renjin.cran:plotlyGeoAssets:0.0.2
 org.renjin.cran:pls:2.7-1
-org.renjin.cran:plumber:0.4.6
 org.renjin.cran:plyr:1.8.4
 org.renjin.cran:poLCA:1.4.1
 org.renjin.cran:polspline:1.1.15
@@ -793,7 +791,6 @@ org.renjin.cran:selectr:0.4-1
 org.renjin.cran:semTools:0.5-1
 org.renjin.cran:sendmailR:1.2-1
 org.renjin.cran:seriation:1.2-7
-org.renjin.cran:servr:0.14
 org.renjin.cran:sessioninfo:1.1.1
 org.renjin.cran:setRNG:2013.9-1
 org.renjin.cran:sets:1.0-18
