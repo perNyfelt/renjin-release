@@ -4,4 +4,4 @@
 /**/.gradle
 /packages/cran
 /packages/settings.gradle
-/tools/build
+**/build/
