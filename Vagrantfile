@@ -24,6 +24,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/home/ubuntu/renjin-release"
   config.vm.synced_folder "~/.m2", "/home/vagrant/.m2"
 
+  # Submodules points to ssh urls, need public key to be able to pull
+  config.vm.synced_folder "~/.ssh", "/home/vagrant/.ssh"
+
   config.vm.provider "virtualbox" do |v|
     v.memory = 9216
     v.cpus = 4
